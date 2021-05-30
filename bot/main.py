@@ -55,16 +55,17 @@ async def warn(ctx, member: discord.Member, *, reason):
 	for i in role_allowed:
 		if i in ctx.author.roles:
 			yes = 1
-			response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'add_warnings', 'author': str(ctx.author), 'reason':str(reason)})
-			json_response = response.json()
-			print(json_response)
-			await member.create_dm()
-			await member.dm_channel.send(f'This is a warning for {reason} sent by {ctx.author}')
-			await ctx.send("Warning sent!")
-			break
 	if yes == 0:
 		embed = discord.Embed(title="Permission Denied.", description="You don't have permission to use this command.", color=0xff00f6) 
 		await ctx.send(embed=embed)
+	elif yes == 1:
+		response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'add_warnings', 'author': str(ctx.author), 'reason':str(reason)})
+		json_response = response.json()
+		print(json_response)
+		await member.create_dm()
+		await member.dm_channel.send(f'This is a warning for {reason} sent by {ctx.author}')
+		await ctx.send("Warning sent!")
+			
 		
 
 
@@ -114,12 +115,12 @@ async def clearwarnings(ctx, member: discord.Member):
 async def checkwarnings(ctx, member: discord.Member):
 	auth = str(ctx.author)
 	response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'checkwarning', 'author': str(ctx.author)})
-	json_response = response.json()
+	json_response = response.text()
 	print(json_response)
-	warningsnum = json_response['number']
-	reasons_list = json_respons['reasons']
-	embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
-	await ctx.send(embed=embed)
+	#warningsnum = json_response['number']
+	#reasons_list = json_response['reasons']
+	#embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
+	#await ctx.send(embed=embed)
 	
 
 
