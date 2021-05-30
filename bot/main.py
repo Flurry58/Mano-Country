@@ -114,17 +114,12 @@ async def clearwarnings(ctx, member: discord.Member):
 async def checkwarnings(ctx, member: discord.Member):
 	auth = str(ctx.author)
 	try_number = 1
-	try:
-		response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'function': 'checkwarning', 'author': auth}).json()
-	except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError):
-		time.sleep(2**try_number + random.random()*0.01) #exponential backoff
-		
-	else:
-		reasons = response['reasons']
-	#warningsnum = json_response['number']
-	#reasons_list = json_response['reasons']
-	#embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
-	#await ctx.send(embed=embed)
+	response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'function': 'checkwarning', 'author': auth})
+	json_response = response.json()
+	warningsnum = json_response[0]
+	reasons_list = json_response[1]
+	embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
+	await ctx.send(embed=embed)
 	
 
 
