@@ -6,6 +6,7 @@ import server
 import requests
 from discord.ext import commands
 import random
+import json
 
 client = commands.Bot(command_prefix='?/')
 memberlist = []
