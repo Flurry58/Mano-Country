@@ -369,6 +369,6 @@ async def on_member_remove(member: discord.Member):
 	print(f'{member} has left a server.')
 
 
-
+TOKEN = os.getenv("DISCORD_TOKEN")
 server.server()
 bot.run(TOKEN)
