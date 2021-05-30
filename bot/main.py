@@ -116,7 +116,7 @@ async def checkwarnings(ctx, member: discord.Member):
 	auth = str(ctx.author)
 	response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'checkwarning', 'author': str(ctx.author)})
 	json_response = response.text
-	print(json_response)
+	print(response)
 	#warningsnum = json_response['number']
 	#reasons_list = json_response['reasons']
 	#embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
