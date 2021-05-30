@@ -370,4 +370,4 @@ async def on_member_remove(member: discord.Member):
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 server.server()
-bot.run(TOKEN)
+client.run(TOKEN)
