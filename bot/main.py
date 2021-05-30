@@ -118,9 +118,9 @@ async def checkwarnings(ctx, member: discord.Member):
 		response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'checkwarning', 'author': str(ctx.author)}).json()
 	except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError):
 		time.sleep(2**try_number + random.random()*0.01) #exponential backoff
-        	return get_submission_records(client, since, try_number=try_number+1)
+		return get_submission_records(client, since, try_number=try_number+1)
 	else:
-        	return response['reasons']
+		return response['reasons']
 	#warningsnum = json_response['number']
 	#reasons_list = json_response['reasons']
 	#embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
