@@ -3,10 +3,8 @@ import os
 #import pynacl
 #import dnspython
 import server
-import requests
 from discord.ext import commands
-import random
-import json
+import requests, json, time, random
 
 client = commands.Bot(command_prefix='?/')
 memberlist = []
