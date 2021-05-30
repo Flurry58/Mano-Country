@@ -27,99 +27,98 @@ async def on_ready():
 
 
   
-
-
 @client.command()
 async def warn(ctx, member: discord.Member, *, reason):
-  yes = 0
-  role1 = discord.utils.get(ctx.guild.roles, name='Head Administrator')
-  role2 = discord.utils.get(ctx.guild.roles, name='Assistant Sheriff')
-  role3 = discord.utils.get(ctx.guild.roles, name='Undersheriff')
-  role4 = discord.utils.get(ctx.guild.roles, name='Sheriff')
-  role5 = discord.utils.get(ctx.guild.roles, name='Co Founder')
-  role6 = discord.utils.get(ctx.guild.roles, name='Founder')
-  role9 = discord.utils.get(ctx.guild.roles, name='Developer')
-  if role1 not in role_allowed:
-    role_allowed.append(role1)
-  if role2 not in role_allowed:
-    role_allowed.append(role2)
-  if role3 not in role_allowed:
-    role_allowed.append(role3)
-  if role4 not in role_allowed:
-    role_allowed.append(role4)
-  if role5 not in role_allowed:
-    role_allowed.append(role5)
-  if role6 not in role_allowed:
-    role_allowed.append(role6) 
-  if role9 not in role_allowed:
-    role_allowed.append(role9)
-  yes = 0
-  for i in role_allowed:
-    if i in ctx.author.roles:
-      key1 = str(member)
-      #db[key1] = db[key1] + 1
-      embed = discord.Embed(title=f'Warning from {ctx.author}',
-      description= f'Warning for {reason}', color=0x34eb3d)
-      await member.create_dm()
-      await member.dm_channel.send(embed=embed)
-      await ctx.send("Warning sent!")
-      yes = 1
-      break
-  if yes == 0:
-    embed = discord.Embed(title="Permission Denied.",description= "You are missing these role(s): Head Administrator, Assistant Sheriff, Undersheriff, Sheriff, Co Founder, Founder, Administrator, Head administrator, or Developer", color=0xf54242)
-    await ctx.send(embed=embed)
-    print("Permission Denied.")
+	yes = 0
+	role1 = discord.utils.get(ctx.guild.roles, name='Head Administrator')
+	role2 = discord.utils.get(ctx.guild.roles, name='Assistant Sheriff')
+	role3 = discord.utils.get(ctx.guild.roles, name='Undersheriff')
+	role4 = discord.utils.get(ctx.guild.roles, name='Sheriff')
+	role5 = discord.utils.get(ctx.guild.roles, name='Co Founder')
+	role6 = discord.utils.get(ctx.guild.roles, name='Founder')
+	role9 = discord.utils.get(ctx.guild.roles, name='Developer')
+	if role1 not in role_allowed:
+		role_allowed.append(role1)
+	if role2 not in role_allowed:
+		role_allowed.append(role2)
+	if role3 not in role_allowed:
+		role_allowed.append(role3)
+	if role4 not in role_allowed:
+		role_allowed.append(role4)
+	if role5 not in role_allowed:
+		role_allowed.append(role5)
+	if role6 not in role_allowed:
+		role_allowed.append(role6) 
+	if role9 not in role_allowed:
+		role_allowed.append(role9)
+	yes = 0
+	for i in role_allowed:
+		if i in ctx.author.roles:
+			response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'add_warnings', 'author': str(ctx.author), 'reason':str(reason)})
+			json_response = response.json()
+			print(json_response)
+			await member.create_dm()
+			await member.dm_channel.send(f'This is a warning for {reason} sent by {ctx.author}')
+			await ctx.send("Warning sent!")
+	if yes == 0:
+		embed = discord.Embed(title="Permission Denied.", description="You don't have permission to use this command.", color=0xff00f6) 
+		await ctx.send(embed=embed)
 		
 
 
 @client.command()
 async def clearwarnings(ctx, member: discord.Member):
-  yes = 0
-  role1 = discord.utils.get(ctx.guild.roles, name='Head Administrator')
-  role2 = discord.utils.get(ctx.guild.roles, name='Assistant Sheriff')
-  role3 = discord.utils.get(ctx.guild.roles, name='Undersheriff')
-  role4 = discord.utils.get(ctx.guild.roles, name='Sheriff')
-  role5 = discord.utils.get(ctx.guild.roles, name='Co Founder')
-  role6 = discord.utils.get(ctx.guild.roles, name='Founder')
-  role9 = discord.utils.get(ctx.guild.roles, name='Developer')
-  if role1 not in role_allowed:
-    role_allowed.append(role1)
-  if role2 not in role_allowed:
-    role_allowed.append(role2)
-  if role3 not in role_allowed:
-    role_allowed.append(role3)
-  if role4 not in role_allowed:
-    role_allowed.append(role4)
-  if role5 not in role_allowed:
-    role_allowed.append(role5)
-  if role6 not in role_allowed:
-    role_allowed.append(role6) 
-  if role9 not in role_allowed:
-    role_allowed.append(role9)
-  for i in role_allowed:
-    if i in ctx.author.roles:
-      key1 = str(member)
-      #db[key1] = 0
-      await member.create_dm()
-      await member.dm_channel.send('Your warnings has been cleared!')
-      await ctx.send(f'Warnings cleared for {key1}')
-      yes = 1
-      break
-    if yes == 0:
-      embed = discord.Embed(
-		    title="Permission Denied.", description=
-		  "You are missing these role(s): Head Administrator, Assistant Sheriff, Undersheriff, Sheriff, Co Founder, Founder, Administrator, Head administrator, or Developer",
-		  color=0xf54242)
-      await ctx.send(embed=embed)
+	yes = 0
+	role1 = discord.utils.get(ctx.guild.roles, name='Head Administrator')
+	role2 = discord.utils.get(ctx.guild.roles, name='Assistant Sheriff')
+	role3 = discord.utils.get(ctx.guild.roles, name='Undersheriff')
+	role4 = discord.utils.get(ctx.guild.roles, name='Sheriff')
+	role5 = discord.utils.get(ctx.guild.roles, name='Co Founder')
+	role6 = discord.utils.get(ctx.guild.roles, name='Founder')
+	role9 = discord.utils.get(ctx.guild.roles, name='Developer')
+	if role1 not in role_allowed:
+		role_allowed.append(role1)
+	if role2 not in role_allowed:
+		role_allowed.append(role2)
+	if role3 not in role_allowed:
+		role_allowed.append(role3)
+	if role4 not in role_allowed:
+		role_allowed.append(role4)
+	if role5 not in role_allowed:
+		role_allowed.append(role5)
+	if role6 not in role_allowed:
+		role_allowed.append(role6) 
+	if role9 not in role_allowed:
+		role_allowed.append(role9)
+	yes = 0
+	for i in role_allowed:
+		if i in ctx.author.roles:
+			auth = str(ctx.author)
+			if role in ctx.author.roles:
+				response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'clearwarnings', 'author': str(ctx.author)})
+				json_response = response.json()		
+				await member.create_dm()
+				await member.dm_channel.send('Your warnings have been cleared!')
+				await ctx.send(f'Warnings cleared for {auth}')
+	if yes == 0:
+		embed = discord.Embed(title="Permission Denied.", description="You don't have permission to use this command.", color=0xff00f6) 
+		await ctx.send(embed=embed)
+		
 
 
 @client.command()
 async def checkwarnings(ctx, member: discord.Member):
-  key1 = str(member)
-  value = db[key1]
-  embed = discord.Embed(description=f'This member has {value} warnings',
-  color = 0xf54242)
-  await ctx.send(embed=embed)
+	auth = str(ctx.author)
+	response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'file': 'warnings','function': 'checkwarning', 'author': str(ctx.author)})
+	json_response = response.json()
+	print(json_response)
+	warningsnum = json_response['number']
+	reasons_list = json_respons['reasons']
+	embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
+	await ctx.send(embed=embed)
+	
+
+
 
 @client.command(pass_context=True)
 async def report(ctx, member: discord.Member, *, reason):
