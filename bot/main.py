@@ -116,8 +116,8 @@ async def checkwarnings(ctx, member: discord.Member):
 	try_number = 1
 	response = requests.get('https://Mano-Country-Database.loganpollack.repl.co', params={'function': 'checkwarning', 'author': auth})
 	json_response = response.json()
-	warningsnum = json_response[0]
-	reasons_list = json_response[1]
+	warningsnum = json_response['number']
+	reasons_list = json_response['reasons']
 	embed = discord.Embed(description=f'This member has {warningsnum} warnings for {reasons_list}',color = 0xf54242)
 	await ctx.send(embed=embed)
 	
